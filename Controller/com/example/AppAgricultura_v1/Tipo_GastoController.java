@@ -14,52 +14,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UsuarioController {
+public class Tipo_GastoController {
+	
+private final Tipo_GastoRepository tr;
 	
 	@Autowired
-	private final UsuarioRepository up;
-	
-	@Autowired
-	public UsuarioController(UsuarioRepository up) {
-		this.up = up;
+	public Tipo_GastoController(Tipo_GastoRepository tr) {
+		this.tr = tr;
 	}
 	
 	
-	@GetMapping("/user")	
+	@GetMapping("/tipogasto")	
 	public ResponseEntity<?> listAll(){
-		return new ResponseEntity<>(up.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(tr.findAll(), HttpStatus.OK);
 		
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/tipogasto/{id}")
 	public ResponseEntity<?> getUsuarioById(@PathVariable Long id) {
 	    try {
-	    	Usuario user = up.findById(id).get();
-	        return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	    	Tipo_Gasto tipo_gasto = tr.findById(id).get();
+	        return new ResponseEntity<Tipo_Gasto>(tipo_gasto, HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
-	        return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<Tipo_Gasto>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@PostMapping("/user/cadastrar")
-	public ResponseEntity<?> save(@RequestBody Usuario usuario) {
-	    return new ResponseEntity<>(up.save(usuario), HttpStatus.OK );
+	@PostMapping("/tipogasto/cadastrar")
+	public ResponseEntity<?> save(@RequestBody Tipo_Gasto tipo_gasto) {
+	    return new ResponseEntity<>(tr.save(tipo_gasto), HttpStatus.OK );
 	}
 	
-	@PutMapping("/user/editar")
-	public ResponseEntity<?> update(@RequestBody Usuario user) {
+	@PutMapping("/tipogasto/editar")
+	public ResponseEntity<?> update(@RequestBody Tipo_Gasto tipo_gasto) {
 	    try {
-	    	up.save(user);
+	    	tr.save(tipo_gasto);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@DeleteMapping("/user/deletar/{id}")
+	@DeleteMapping("/tipogasto/deletar/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-	    up.deleteById(id);
+		tr.deleteById(id);
 	    return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
 	
 }

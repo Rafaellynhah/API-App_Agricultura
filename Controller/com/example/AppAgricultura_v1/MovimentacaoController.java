@@ -14,52 +14,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UsuarioController {
+public class MovimentacaoController {
+	
+private final MovimentacaoRepository mr;
 	
 	@Autowired
-	private final UsuarioRepository up;
-	
-	@Autowired
-	public UsuarioController(UsuarioRepository up) {
-		this.up = up;
+	public MovimentacaoController(MovimentacaoRepository mr) {
+		this.mr = mr;
 	}
 	
 	
-	@GetMapping("/user")	
+	@GetMapping("/movimentacao")	
 	public ResponseEntity<?> listAll(){
-		return new ResponseEntity<>(up.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(mr.findAll(), HttpStatus.OK);
 		
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/movimentacao/{id}")
 	public ResponseEntity<?> getUsuarioById(@PathVariable Long id) {
 	    try {
-	    	Usuario user = up.findById(id).get();
-	        return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	    	Movimentacao movimentacao = mr.findById(id).get();
+	        return new ResponseEntity<Movimentacao>(movimentacao, HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
-	        return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<Movimentacao>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@PostMapping("/user/cadastrar")
-	public ResponseEntity<?> save(@RequestBody Usuario usuario) {
-	    return new ResponseEntity<>(up.save(usuario), HttpStatus.OK );
+	@PostMapping("/movimentacao/cadastrar")
+	public ResponseEntity<?> save(@RequestBody Movimentacao movimentacao) {
+	    return new ResponseEntity<>(mr.save(movimentacao), HttpStatus.OK );
 	}
 	
-	@PutMapping("/user/editar")
-	public ResponseEntity<?> update(@RequestBody Usuario user) {
+	@PutMapping("/movimentacao/editar")
+	public ResponseEntity<?> update(@RequestBody Movimentacao movimentacao) {
 	    try {
-	    	up.save(user);
+	    	mr.save(movimentacao);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@DeleteMapping("/user/deletar/{id}")
+	@DeleteMapping("/movimentacao/deletar/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-	    up.deleteById(id);
+		mr.deleteById(id);
 	    return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
 	
 }

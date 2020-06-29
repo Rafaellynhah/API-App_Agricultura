@@ -14,52 +14,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UsuarioController {
+public class GastoController {
+	
+private final GastoRepository gr;
 	
 	@Autowired
-	private final UsuarioRepository up;
-	
-	@Autowired
-	public UsuarioController(UsuarioRepository up) {
-		this.up = up;
+	public GastoController(GastoRepository gr) {
+		this.gr = gr;
 	}
 	
 	
-	@GetMapping("/user")	
+	@GetMapping("/gasto")	
 	public ResponseEntity<?> listAll(){
-		return new ResponseEntity<>(up.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(gr.findAll(), HttpStatus.OK);
 		
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/gasto/{id}")
 	public ResponseEntity<?> getUsuarioById(@PathVariable Long id) {
 	    try {
-	    	Usuario user = up.findById(id).get();
-	        return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	    	Gasto gasto = gr.findById(id).get();
+	        return new ResponseEntity<Gasto>(gasto, HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
-	        return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<Gasto>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@PostMapping("/user/cadastrar")
-	public ResponseEntity<?> save(@RequestBody Usuario usuario) {
-	    return new ResponseEntity<>(up.save(usuario), HttpStatus.OK );
+	@PostMapping("/gasto/cadastrar")
+	public ResponseEntity<?> save(@RequestBody Gasto gasto) {
+	    return new ResponseEntity<>(gr.save(gasto), HttpStatus.OK );
 	}
 	
-	@PutMapping("/user/editar")
-	public ResponseEntity<?> update(@RequestBody Usuario user) {
+	@PutMapping("/gasto/editar")
+	public ResponseEntity<?> update(@RequestBody Gasto gasto) {
 	    try {
-	    	up.save(user);
+	    	gr.save(gasto);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    } catch (NoSuchElementException e) {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }      
 	}
 	
-	@DeleteMapping("/user/deletar/{id}")
+	@DeleteMapping("/gasto/deletar/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-	    up.deleteById(id);
+		gr.deleteById(id);
 	    return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	//Calculo
+	public void CalcularMediaGastos() {
+		
+	}
+	
 	
 }
