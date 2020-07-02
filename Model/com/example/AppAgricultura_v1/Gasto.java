@@ -13,8 +13,6 @@ public class Gasto extends AbstractEntity{
 	
 	private float qtd_mensal;
 	
-	private float media_gasto;
-
 	
 	@ManyToOne
 	private Tipo_Gasto tp_gasto;
@@ -55,14 +53,6 @@ public class Gasto extends AbstractEntity{
 
 	public void setQtd_mensal(float qtd_mensal) {
 		this.qtd_mensal = qtd_mensal;
-	}
-
-	public float getMedia_gasto() {
-		return media_gasto;
-	}
-
-	public void setMedia_gasto(float media_gasto) {
-		this.media_gasto = media_gasto;
 	}
 
 

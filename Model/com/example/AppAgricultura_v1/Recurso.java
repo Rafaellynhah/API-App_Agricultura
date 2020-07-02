@@ -12,9 +12,10 @@ import javax.persistence.OneToMany;
 @Entity
 public class Recurso extends AbstractEntity{
 
+	
 	private String nome;
 	
-	private int qtd_incial;
+	private int qtd_inicial;
 	
 	private int qtd_final;
 	
@@ -24,7 +25,11 @@ public class Recurso extends AbstractEntity{
 	
 	private String problema;
 	
+	private String dt_entrada;
+	private String dt_saida;
 	
+	
+
 	@ManyToOne
 	private Tipo_Recurso tp_recurso;
 	
@@ -45,13 +50,6 @@ public class Recurso extends AbstractEntity{
 		this.nome = nome;
 	}
 
-	public int getQtd_incial() {
-		return qtd_incial;
-	}
-
-	public void setQtd_incial(int qtd_incial) {
-		this.qtd_incial = qtd_incial;
-	}
 
 	public int getQtd_final() {
 		return qtd_final;
@@ -85,7 +83,30 @@ public class Recurso extends AbstractEntity{
 		this.problema = problema;
 	}
 
-	
+	public int getQtd_inicial() {
+		return qtd_inicial;
+	}
+
+	public void setQtd_inicial(int qtd_inicial) {
+		this.qtd_inicial = qtd_inicial;
+	}
+
+	public String getDt_entrada() {
+		return dt_entrada;
+	}
+
+	public void setDt_entrada(String dt_entrada) {
+		this.dt_entrada = dt_entrada;
+	}
+
+	public String getDt_saida() {
+		return dt_saida;
+	}
+
+	public void setDt_saida(String dt_saida) {
+		this.dt_saida = dt_saida;
+	}
+
 
 	
 }

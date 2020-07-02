@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Tipo_RecursoController {
 	
 private final Tipo_RecursoRepository tr;
+
+
 	
 	@Autowired
 	public Tipo_RecursoController(Tipo_RecursoRepository tr) {

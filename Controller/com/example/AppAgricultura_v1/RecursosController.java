@@ -1,7 +1,6 @@
 package com.example.AppAgricultura_v1;
 
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecursosController {
 	
 private final RecursoRepository rr;
-	
+
+
 	@Autowired
 	public RecursosController(RecursoRepository rr) {
 		this.rr = rr;
+		
 	}
 	
 	
@@ -32,7 +33,7 @@ private final RecursoRepository rr;
 	}
 	
 	@GetMapping("/recursos/{id}")
-	public ResponseEntity<?> getUsuarioById(@PathVariable Long id) {
+	public ResponseEntity<?> getRecursosById(@PathVariable Long id) {
 	    try {
 	    	Recurso rec = rr.findById(id).get();
 	        return new ResponseEntity<Recurso>(rec, HttpStatus.OK);
