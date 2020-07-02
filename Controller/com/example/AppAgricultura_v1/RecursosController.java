@@ -74,11 +74,10 @@ private final RecursoRepository rr;
 		float qtd_final = recurso.getQtd_final();
 		float pd_esperada = recurso.getProdutividade_esperada();
 		float produtividade = 0;
-		float percentual_produtividade = 0;
+	
 		
-		produtividade = pd_esperada-qtd_final;
-		percentual_produtividade = ((pd_esperada+qtd_final)*produtividade)/100;
-		recurso.setProdutividade(percentual_produtividade);
+		produtividade = (qtd_final/pd_esperada)*100;
+		recurso.setProdutividade(produtividade);
 		rr.save(recurso);
 			
 		
